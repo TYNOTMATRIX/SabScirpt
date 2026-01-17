@@ -1,28 +1,44 @@
-local RunService = game:GetService("RunService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Net = require(ReplicatedStorage:WaitForChild("Packages"):WaitForChild("Net"))
-local remote = Net:RemoteEvent("Tools/SantasSleigh/DropPresent")
-
-local lp = game.Players.LocalPlayer
-lp.CharacterAdded:Connect(function(char)
-    local hum = char:WaitForChild("Humanoid")
-    hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false) 
-end)
-
-local function data()
-    local data = {}
-    for i = 1, math.random(800, 1200) do
-        data[tostring(i)] = Vector3.new(math.random(-500, 500), math.random(100, 200), math.random(-500, 500))
-    end
-    return data
-end
-
-RunService.Stepped:Connect(function()
-    if tick() % 0.5 < 0.2 then 
-        for i = 1, 250 do
-            task.spawn(function()
-                remote:FireServer(data())
-            end)
-        end
-    end
-end)
+local Players = game:GetService'Players'
+setfflag("LargeReplicatorEnabled9", "True")
+setfflag("TimestepArbiterVelocityCriteriaThresholdTwoDt", "2147483646")
+setfflag("S2PhysicsSenderRate", "15000")
+setfflag("DisableDPIScale", "True")
+setfflag("PhysicsSenderMaxBandwidthBps", "20000")
+setfflag("SimOwnedNOUCountThresholdMillionth", "2147483647")
+setfflag("StreamJobNOUVolumeLengthCap", "2147483647")
+setfflag("GameNetPVHeaderRotationalVelocityZeroCutoffExponent", "-5000")
+setfflag("MaxMissedWorldStepsRemembered", "-2147483648")
+setfflag("GameNetDontSendRedundantNumTimes", "1")
+setfflag("InterpolationFramePositionThresholdMillionth", "5")
+setfflag("CheckPVCachedVelThresholdPercent", "10")
+setfflag("SimDefaultHumanoidTimestepMultiplier", "0")
+setfflag("NextGenReplicatorEnabledWrite4", "True")
+setfflag("CheckPVDifferencesForInterpolationMinRotVelThresholdRadsPerSecHundredth", "1")
+setfflag("InterpolationFrameVelocityThresholdMillionth", "5")
+setfflag("ReplicationFocusNouExtentsSizeCutoffForPauseStuds", "2147483647")
+setfflag("CheckPVCachedRotVelThresholdPercent", "10")
+setfflag("CheckPVLinearVelocityIntegrateVsDeltaPositionThresholdPercent", "1")
+setfflag("TimestepArbiterHumanoidTurningVelThreshold", "1")
+setfflag("MaxDataPacketPerSend", "2147483647")
+setfflag("CheckPVDifferencesForInterpolationMinVelThresholdStudsPerSecHundredth", "1")
+setfflag("PlayerHumanoidPropertyUpdateRestrict", "True")
+setfflag("MaxAcceptableUpdateDelay", "1")
+local Model = Instance.new("Model")
+Model.Name = "HitboxMarker"
+Model.Parent = workspace
+local Part = Instance.new("Part")
+Part.Name = "MainBox"
+Part.Size = Vector3.new(5, 6, 5)
+Part.Anchored = true
+Part.CanCollide = false
+Part.Material = Enum.Material.ForceField
+Part.Color = Color3.new(0.705882, 0.392157, 1)
+Part.Transparency = 0.8
+Part.CFrame = Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+Part.Parent = Model
+local Highlight = Instance.new("Highlight")
+Highlight.FillColor = Color3.new(0.705882, 0.392157, 1)
+Highlight.OutlineColor = Color3.new(0.588235, 0.313726, 0.784314)
+Highlight.FillTransparency = 0.7
+Highlight.OutlineTransparency = 0.3
+Highlight.Parent = Part
